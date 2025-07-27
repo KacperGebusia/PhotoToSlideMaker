@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 import os
 
 BACKGROUND = "data/tło.jpg"
@@ -19,6 +19,7 @@ def prepare_images(background_path: str, input_folder: str, output_folder: str =
 
         img_path = os.path.join(input_folder, filename)
         img = Image.open(img_path).convert("RGBA")
+        img = ImageOps.exif_transpose(img)  # naprawia obrót wg EXIF
 
         # Rozmiar zdjęcia
         img_width, img_height = img.size
